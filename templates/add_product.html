@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block content %}
+<h2>Add New Product</h2>
+
+{{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+
+{% endblock %}

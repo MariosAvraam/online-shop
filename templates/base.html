@@ -36,6 +36,11 @@
             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
           </li>
           {% endif %}
+          {% if current_user.is_authenticated and current_user.is_admin %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('add_product') }}">Add Product</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </nav>

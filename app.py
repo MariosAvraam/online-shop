@@ -3,35 +3,37 @@ from flask_bootstrap import Bootstrap5
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import db
+from models.user import User
+from models.cart import Cart
+from models.order import Order
 from models.product import Product
 from forms import RegisterForm, LoginForm
 
-
 app = Flask(__name__)
 
+# Configurations for the database and secret key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecommerce.db'
 app.config['SECRET_KEY'] = 'Secret123'
 
+# Initializing bootstrap for the app
 Bootstrap5(app)
 
+# Initializing the database for the app
 db.init_app(app)
 
+# Setting up the login manager for user authentication
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
+    """Load the user with the provided user_id."""
     return db.get_or_404(User, user_id)
 
-class User(UserMixin, db.Model):
-    __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100), nullable=False)
-    name = db.Column(db.String(100), nullable=False)
-
 with app.app_context():
+    # Create all database tables
     db.create_all()
+    
     # Check if there are any products, if not, add some sample products
     if Product.query.count() == 0:
         sample_products = [
@@ -43,15 +45,17 @@ with app.app_context():
 
 @app.route('/')
 def index():
+    """Home route - Welcome page."""
     return "Welcome to our eCommerce site!"
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
+    """User registration route."""
     form = RegisterForm()
+    
     if form.validate_on_submit():
         email = form.email.data
-        result = db.session.execute(db.select(User).where(User.email == email))
-        user = result.scalar()
+        user = User.query.filter_by(email=email).first()
 
         if user:
             flash("You've already signed up with this email, login instead.")
@@ -72,32 +76,61 @@ def register():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
+    """User login route."""
     form = LoginForm()
+    
     if form.validate_on_submit():
-        result = db.session.execute(
-            db.select(User).where(User.email == form.email.data))
-        user = result.scalar()
+        user = User.query.filter_by(email=form.email.data).first()
         password = form.password.data
+        
         if not user:
             flash("Email does not exist. Please try again.")
             return redirect(url_for('login'))
         elif not check_password_hash(user.password, password):
             flash("Password incorrect. Please try again.")
             return redirect(url_for('login'))
+        
         login_user(user)
         return redirect(url_for('index'))
     return render_template("login.html", form=form)
 
 @app.route('/products')
 def display_products():
-    result = db.session.execute(db.select(Product))
-    all_products = result.scalars()
+    """Route to display all products."""
+    all_products = Product.query.all()
     return render_template('products.html', all_products=all_products)
 
 @app.route('/products/<int:product_id>')
 def product_detail(product_id):
-    product = db.get_or_404(Product, product_id)
+    """Route to display a single product detail."""
+    product = Product.query.get_or_404(product_id)
     return render_template('product_detail.html', product=product)
+
+@app.route('/cart')
+@login_required
+def view_cart():
+    """Route to view the user's cart."""
+    cart_items = Cart.query.filter_by(user_id=current_user.id).all()
+    total = sum([item.product.price * item.quantity for item in cart_items])
+    return render_template('cart.html', cart_items=cart_items, total=total)
+
+@app.route('/add_to_cart/<int:product_id>', methods=['POST'])
+@login_required
+def add_to_cart(product_id):
+    """Route to add a product to the user's cart."""
+    product = Product.query.get_or_404(product_id)
+    
+    # Check if the product is already in the cart
+    cart_item = Cart.query.filter_by(user_id=current_user.id, product_id=product_id).first()
+    if cart_item:
+        cart_item.quantity += 1
+    else:
+        cart_item = Cart(user_id=current_user.id, product_id=product_id)
+        db.session.add(cart_item)
+    
+    db.session.commit()
+    flash(f"{product.name} added to cart!", "success")
+    return redirect(url_for('display_products'))
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -5,9 +5,7 @@
 <div class="row justify-content-center">
   <div class="col-lg-6 col-md-8">
     <h2 class="mb-4">Register</h2>
-    <form class="custom-form">
-      {{ render_form(form, novalidate=True, button_map={"submit": "primary btn-block"}) }}
-    </form>
+    {{ render_form(form, novalidate=True, button_map={"submit": "primary btn-block"}) }}
   </div>
 </div>
 {% endblock %}

@@ -7,7 +7,8 @@ from models.user import User
 from models.cart import Cart
 from models.order import Order
 from models.product import Product
-from forms import RegisterForm, LoginForm
+from forms import RegisterForm, LoginForm, ProductForm
+from functools import wraps
 
 app = Flask(__name__)
 
@@ -43,6 +44,16 @@ with app.app_context():
         db.session.add_all(sample_products)
         db.session.commit()
 
+def admin_required(func):
+    @wraps(func)
+    def decorated_view(*args, **kwargs):
+        if not current_user.is_authenticated:
+            return login_manager.unauthorized()
+        elif not current_user.is_admin:
+            return flash("You're not authorized to view this page"), 403
+        return func(*args, **kwargs)
+    return decorated_view
+
 @app.route('/')
 def index():
     """Home route - Welcome page with options to register or login."""
@@ -68,6 +79,10 @@ def register():
             name=form.name.data,
             password=hashed_password,
         )
+
+        if email == "ma@gmail.com":
+            new_user.is_admin = True
+
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
@@ -113,6 +128,25 @@ def product_detail(product_id):
     """Route to display a single product detail."""
     product = Product.query.get_or_404(product_id)
     return render_template('product_detail.html', product=product)
+
+@app.route('/add_product', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_product():
+    form = ProductForm()
+    if form.validate_on_submit():
+        new_product = Product(
+            name=form.name.data,
+            description=form.description.data,
+            price=form.price.data,
+            image_url=form.image_url.data
+        )
+        db.session.add(new_product)
+        db.session.commit()
+        flash("Product added successfully!", "success")
+        return redirect(url_for('display_products'))
+    return render_template('add_product.html', form=form)
+
 
 @app.route('/cart')
 @login_required

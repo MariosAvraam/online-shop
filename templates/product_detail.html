@@ -11,5 +11,8 @@
 <p>$
   {{ product.price }}
 </p>
-<a href="#" class="btn btn-primary">Add to Cart</a>
+<form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
+  <button type="submit" class="btn btn-primary">Add to Cart</button>
+</form>
+
 {% endblock %}

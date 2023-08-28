@@ -1,6 +1,10 @@
 body {
     background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    min-height: 100vh; /* Ensure the body takes up at least 100% of the viewport height */
+    display: flex;
+    flex-direction: column;
 }
+
 
 /* Enhanced Button Styling */
 .btn-primary {
@@ -46,8 +50,25 @@ body {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
 }
-
-.custom-form .btn-primary {
-    display: block;
-    margin: 0 auto;
+/* Product Card Styling */
+.card {
+    margin-bottom: 30px; 
+    border: none;        
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
 }
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+

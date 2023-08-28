@@ -1,11 +1,8 @@
 {% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
 
 {% block content %}
 <h2>Login</h2>
-<form method="post">
-    {{ form.hidden_tag() }}
-    {{ form.email.label }} {{ form.email() }}<br>
-    {{ form.password.label }} {{ form.password() }}<br>
-    {{ form.submit() }}
-</form>
+
+{{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
 {% endblock %}

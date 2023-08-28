@@ -3,6 +3,7 @@ from flask_bootstrap import Bootstrap5
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import db
+from models.product import Product
 from forms import RegisterForm, LoginForm
 
 
@@ -31,6 +32,14 @@ class User(UserMixin, db.Model):
 
 with app.app_context():
     db.create_all()
+    # Check if there are any products, if not, add some sample products
+    if Product.query.count() == 0:
+        sample_products = [
+            Product(name="Sample Product 1", description="This is a sample product.", price=19.99, image_url="https://via.placeholder.com/150"),
+            Product(name="Sample Product 2", description="This is another sample product.", price=29.99, image_url="https://via.placeholder.com/150"),
+        ]
+        db.session.add_all(sample_products)
+        db.session.commit()
 
 @app.route('/')
 def index():
@@ -78,6 +87,17 @@ def login():
         login_user(user)
         return redirect(url_for('index'))
     return render_template("login.html", form=form)
+
+@app.route('/products')
+def display_products():
+    result = db.session.execute(db.select(Product))
+    all_products = result.scalars()
+    return render_template('products.html', all_products=all_products)
+
+@app.route('/products/<int:product_id>')
+def product_detail(product_id):
+    product = db.get_or_404(Product, product_id)
+    return render_template('product_detail.html', product=product)
 
 if __name__ == "__main__":
     app.run(debug=True)

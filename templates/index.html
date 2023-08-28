@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Welcome to our eCommerce site!</h1>
+    <p>
+        Whether you are new here or a returning user, you can navigate using the options above.
+    </p>
+    <div class="mt-4">
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
+        <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+    </div>
+</div>
+{% endblock %}

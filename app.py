@@ -45,8 +45,8 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    """Home route - Welcome page."""
-    return "Welcome to our eCommerce site!"
+    """Home route - Welcome page with options to register or login."""
+    return render_template('index.html')
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -93,6 +93,14 @@ def login():
         login_user(user)
         return redirect(url_for('index'))
     return render_template("login.html", form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    """Route to log out the user."""
+    logout_user()
+    flash("Logged out successfully!", "success")
+    return redirect(url_for('index'))
 
 @app.route('/products')
 def display_products():

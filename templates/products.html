@@ -4,8 +4,8 @@
 <h2>Products</h2>
 <div class="row">
     {% for product in all_products %}
-    <div class="col-md-4">
-        <div class="card">
+    <div class="col-md-4 d-flex align-items-stretch">
+        <div class="card h-100 w-100"> <!-- Added w-100 class -->
             <img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>

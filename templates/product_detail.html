@@ -2,20 +2,24 @@
 
 {% block content %}
 <div class="row justify-content-center">
-  <div class="col-lg-6 col-md-8 text-center">
-    <h2>
-      {{ product.name }}
-    </h2>
-    <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid product-detail-image mx-auto d-block">
-    <p>
-      {{ product.description }}
-    </p>
-    <p>$
-      {{ product.price }}
-    </p>
-    <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
-      <button type="submit" class="btn btn-primary">Add to Cart</button>
-    </form>
+  <div class="col-lg-4 col-md-6 text-center">
+    <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid product-detail-image">
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <div class="product-detail-text">
+      <h2>
+        {{ product.name }}
+      </h2>
+      <p>
+        {{ product.description }}
+      </p>
+      <p>$
+        {{ product.price }}
+      </p>
+      <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+      </form>
+    </div>
   </div>
 </div>
 {% endblock %}

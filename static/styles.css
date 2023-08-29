@@ -5,6 +5,10 @@ body {
     flex-direction: column;
 }
 
+h2 {
+    margin-bottom: 10px;
+}
+
 
 /* Enhanced Button Styling */
 .btn-primary {
@@ -72,3 +76,38 @@ body {
     margin-bottom: 10px;
 }
 
+/* Product Detail Image Styling */
+.product-detail-image {
+    max-width: 300px;
+    border-radius: 15px; /* Make the image rounded */
+    border: 2px solid #007bff; /* Add a border around the image */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add shadow to the image */
+    transition: transform 0.3s;
+}
+
+.product-detail-image:hover {
+    transform: scale(1.05);
+}
+
+/* Product Detail Text Styling */
+.product-detail-text {
+    border: 2px solid #007bff; /* Add border to the text */
+    background-color: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); /* Same as body background */
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.product-detail-text h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.product-detail-text p {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.product-detail-text button {
+    margin-top: 10px;
+    font-size: 1rem;
+}

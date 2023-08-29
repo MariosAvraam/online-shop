@@ -34,15 +34,6 @@ def load_user(user_id):
 with app.app_context():
     # Create all database tables
     db.create_all()
-    
-    # Check if there are any products, if not, add some sample products
-    if Product.query.count() == 0:
-        sample_products = [
-            Product(name="Sample Product 1", description="This is a sample product.", price=19.99, image_url="https://via.placeholder.com/150"),
-            Product(name="Sample Product 2", description="This is another sample product.", price=29.99, image_url="https://via.placeholder.com/150"),
-        ]
-        db.session.add_all(sample_products)
-        db.session.commit()
 
 def admin_required(func):
     @wraps(func)

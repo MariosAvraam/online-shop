@@ -1,11 +1,10 @@
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
-from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from flask_login import login_user, LoginManager, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import db
 from models.user import User
 from models.cart import Cart
-from models.order import Order
 from models.product import Product
 from forms import RegisterForm, LoginForm, ProductForm, EditProductForm
 from functools import wraps

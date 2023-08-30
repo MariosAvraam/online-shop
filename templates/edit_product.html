@@ -6,6 +6,14 @@
   <div class="col-lg-6 col-md-8">
     <h2 class="mb-4">Edit Product</h2>
     {{ render_form(form, novalidate=True, button_map={"submit": "primary btn-block"}) }}
+
+    <!-- Delete button for admin -->
+    {% if current_user.is_authenticated and current_user.is_admin %}
+    <form action="{{ url_for('delete_product', product_id=product.id) }}" method="post" class="mt-2">
+      <!-- Adjust the padding with "py-3" to make the button taller -->
+      <button type="submit" class="btn btn-danger btn-block px-3">Delete Product</button>
+    </form>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

@@ -1,74 +1,69 @@
+/* Background gradient for the entire body */
 body {
     background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-    min-height: 100vh; /* Ensure the body takes up at least 100% of the viewport height */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
+/* Navbar styling */
 .navbar {
     background-color: #81abd7 !important; 
 }
 
+/* Default margin for heading level 2 */
 h2 {
     margin-bottom: 20px;
 }
 
-/* General Button Styling */
+/* General button styles, transitions, and shadows */
 .btn {
     border: none;
     transition: all 0.3s ease;
     box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
 }
-
 .btn:hover {
     transform: translateY(-1px);
     box-shadow: 0px 7px 14px rgba(50, 50, 93, 0.1), 0px 3px 6px rgba(0, 0, 0, 0.08);
 }
-
 .btn-primary {
     background-color: #007bff;
 }
-
 .btn-primary:hover {
     background-color: #0056b3;
 }
-
 .btn-light {
     background-color: #fff;
 }
-
 .btn-light:hover {
     background-color: #f8f9fa;
 }
-
 .btn-success {
     background-color: #28a745;
 }
-
 .btn-success:hover {
     background-color: #218838;
 }
 
+/* Button with fixed width */
 .btn-fixed-width {
     min-width: 150px;
     margin-right: 10px;
 }
 
-/* Form Styling */
+/* Styling for forms and their components */
 .form-group {
     margin-bottom: 0.5rem;
 }
-
 .form-group label {
     margin-bottom: 0.25rem;
 }
-
 .form-control {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
 }
 
-/* Product Card Styling */
+/* Styling for product cards displayed in grids */
 .card {
     margin-bottom: 30px;
     border: none;
@@ -79,28 +74,24 @@ h2 {
     display: flex;
     flex-direction: column;
 }
-
 .card:hover {
     transform: translateY(-5px);
 }
-
 .card-body {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-
 .card-img-top {
     height: 200px;
     object-fit: cover;
 }
-
 .card-title {
     font-size: 1.25rem;
     margin-bottom: 10px;
 }
 
-/* Product Detail Styling */
+/* Styling for individual product details */
 .product-detail-image {
     max-width: 300px;
     border-radius: 15px;
@@ -108,58 +99,49 @@ h2 {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s;
 }
-
 .product-detail-image:hover {
     transform: scale(1.05);
 }
-
 .product-detail-text {
     border: 2px solid #007bff;
     background-color: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
     padding: 20px;
     border-radius: 15px;
 }
-
 .product-detail-text h2 {
     margin-bottom: 20px;
     font-size: 1.8rem;
 }
-
 .product-detail-text p {
     margin-bottom: 20px;
     font-size: 1.2rem;
 }
-
 .product-detail-text button {
     margin-top: 10px;
     font-size: 1rem;
 }
 
-/* Grid Styling */
+/* Grid column styling */
 .col-md-4 {
     margin-bottom: 20px;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-/* Cart Page Styling */
+/* Styling specific to cart page */
 .table-hover tbody tr:hover {
     background-color: #e1f7e4;
 }
-
 .product-col {
-    width: 60%; /* Adjust this value as needed */
+    width: 60%;
 }
-
 .price-col, .quantity-col, .total-col {
-    width: 13%; /* Adjust this value as needed */
+    width: 13%;
 }
-
 .table {
     table-layout: fixed;
 }
-
 .table-container {
-    width: 70%; /* Or any other desired width */
-    margin: 0 auto; /* This centers the container */
+    width: 70%;
+    margin: 0 auto;
 }

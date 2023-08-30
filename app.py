@@ -62,7 +62,7 @@ def register():
         user = User.query.filter_by(email=email).first()
 
         if user:
-            flash("You've already signed up with this email, login instead.")
+            flash("You've already signed up with this email, login instead.", "success")
             return redirect(url_for('login'))
 
         hashed_password = generate_password_hash(
@@ -79,6 +79,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
+        flash("Registered successfully!", "success")
         return redirect(url_for('display_products'))
     return render_template("register.html", form=form)
 
@@ -92,13 +93,14 @@ def login():
         password = form.password.data
         
         if not user:
-            flash("Email does not exist. Please try again.")
+            flash("Email does not exist. Please try again.", "success")
             return redirect(url_for('login'))
         elif not check_password_hash(user.password, password):
-            flash("Password incorrect. Please try again.")
+            flash("Password incorrect. Please try again.", "success")
             return redirect(url_for('login'))
         
         login_user(user)
+        flash("Logged in successfully!", "success")
         return redirect(url_for('display_products'))
     return render_template("login.html", form=form)
 

@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="table-container">
 <h2>Your Cart</h2>
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th>Product</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Total</th>
+      <th class="product-col">Product</th>
+      <th class="price-col">Price</th>
+      <th class="quantity-col">Quantity</th>
+      <th class="total-col">Total</th>
     </tr>
   </thead>
   <tbody>
@@ -39,5 +40,6 @@
       {{ total }}
     </h4>
   </div>
+</div>
 </div>
 {% endblock %}

@@ -3,18 +3,33 @@
 {% block content %}
 <h2>Products</h2>
 <div class="row">
-    {% for product in all_products %}
-    <div class="col-md-4 d-flex align-items-stretch">
-        <div class="card h-100 w-100"> <!-- Added w-100 class -->
-            <img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top">
-            <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description }}</p>
-                <p class="card-text">${{ product.price }}</p>
-                <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-primary">View Details</a>
-            </div>
+  {% for product in all_products %}
+  <div class="col-md-4 d-flex align-items-stretch">
+    <div class="card h-100 w-100">
+      <img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top">
+      <div class="card-body d-flex flex-column justify-content-between">
+        <div>
+          <h5 class="card-title">
+            {{ product.name }}
+          </h5>
+          <p class="card-text">
+            {{ product.description }}
+          </p>
+          <p class="card-text">$
+            {{ product.price }}
+          </p>
         </div>
+        <div class="d-flex justify-content-between">
+          <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-primary btn-block w-100">View Details</a>
+
+          {% if current_user.is_authenticated and current_user.is_admin %}
+          <a href="{{ url_for('edit_product', product_id=product.id) }}" class="btn btn-secondary btn-block w-100 mt-2">Edit</a>
+          {% endif %}
+
+        </div>
+      </div>
     </div>
-    {% endfor %}
+  </div>
+  {% endfor %}
 </div>
 {% endblock %}

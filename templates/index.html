@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Centered welcome message for the home page -->
 <div class="text-center mt-5">
-    <h1>Welcome to our eCommerce site!</h1>
-    <p class="lead">
-        Whether you are new here or a returning user, you can navigate using the options below.
-    </p>
-    <div class="mt-4">
-        <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg btn-fixed-width">Register</a>
-        <a href="{{ url_for('login') }}" class="btn btn-light btn-lg btn-fixed-width">Login</a>
-    </div>
+  <h1>Welcome to our eCommerce site!</h1>
+  <p class="lead">
+    Whether you are new here or a returning user, you can navigate using the options below.
+  </p>
+  <!-- Registration and Login buttons -->
+  <div class="mt-4">
+    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg btn-fixed-width">Register</a>
+    <a href="{{ url_for('login') }}" class="btn btn-light btn-lg btn-fixed-width">Login</a>
+  </div>
 </div>
 {% endblock %}

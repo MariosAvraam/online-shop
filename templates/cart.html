@@ -2,25 +2,42 @@
 
 {% block content %}
 <h2>Your Cart</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in cart_items %}
-        <tr>
-            <td>{{ item.product.name }}</td>
-            <td>${{ item.product.price }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>${{ item.product.price * item.quantity }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in cart_items %}
+    <tr>
+      <td>
+        {{ item.product.name }}
+      </td>
+      <td>$
+        {{ item.product.price }}
+      </td>
+      <td>
+        {{ item.quantity }}
+      </td>
+      <td>$
+        {{ item.product.price * item.quantity }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
-<p class="text-right">Total: ${{ total }}</p>
+<div class="row mt-3">
+  <div class="col-md-9">
+    <button class="btn btn-success">Proceed to Checkout</button>
+  </div>
+  <div class="col-md-3 text-right">
+    <h4 class="mb-0 px-3">Total: $
+      {{ total }}
+    </h4>
+  </div>
+</div>
 {% endblock %}

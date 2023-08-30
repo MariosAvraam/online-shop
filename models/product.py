@@ -7,3 +7,4 @@ class Product(db.Model):
     description = db.Column(db.Text, nullable=True)
     price = db.Column(db.Float, nullable=False)
     image_url = db.Column(db.String(300), nullable=True)
+    cart_items = db.relationship('Cart', back_populates='product', cascade='all, delete-orphan')

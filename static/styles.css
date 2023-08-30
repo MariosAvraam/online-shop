@@ -9,33 +9,40 @@ h2 {
     margin-bottom: 10px;
 }
 
-/* Enhanced Button Styling */
+/* General Button Styling */
+.btn {
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0px 7px 14px rgba(50, 50, 93, 0.1), 0px 3px 6px rgba(0, 0, 0, 0.08);
+}
+
 .btn-primary {
     background-color: #007bff;
-    border: none;
-    box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    align-self: flex-start; /* Align the button to the left */
-    margin-top: auto; /* Push the button to the bottom */
 }
 
 .btn-primary:hover {
     background-color: #0056b3;
-    transform: translateY(-1px);
-    box-shadow: 0px 7px 14px rgba(50, 50, 93, 0.1), 0px 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .btn-light {
     background-color: #fff;
-    border: none;
-    box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
 }
 
 .btn-light:hover {
     background-color: #f8f9fa;
-    transform: translateY(-1px);
-    box-shadow: 0px 7px 14px rgba(50, 50, 93, 0.1), 0px 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.btn-success {
+    background-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
 }
 
 .btn-fixed-width {
@@ -43,6 +50,7 @@ h2 {
     margin-right: 10px;
 }
 
+/* Form Styling */
 .form-group {
     margin-bottom: 0.5rem;
 }
@@ -55,14 +63,15 @@ h2 {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
 }
+
 /* Product Card Styling */
 .card {
-    margin-bottom: 30px; 
-    border: none;        
+    margin-bottom: 30px;
+    border: none;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s;
-    width: 300px; /* or any other specific width you desire */
-    margin: 15px; /* centers the card within the column */
+    width: 300px;
+    margin: 15px;
     display: flex;
     flex-direction: column;
 }
@@ -72,7 +81,7 @@ h2 {
 }
 
 .card-body {
-    flex: 1; /* This will make the card-body grow to occupy all available space */
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
@@ -87,12 +96,12 @@ h2 {
     margin-bottom: 10px;
 }
 
-/* Product Detail Image Styling */
+/* Product Detail Styling */
 .product-detail-image {
     max-width: 300px;
-    border-radius: 15px; /* Make the image rounded */
-    border: 2px solid #007bff; /* Add a border around the image */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add shadow to the image */
+    border-radius: 15px;
+    border: 2px solid #007bff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s;
 }
 
@@ -100,10 +109,9 @@ h2 {
     transform: scale(1.05);
 }
 
-/* Product Detail Text Styling */
 .product-detail-text {
-    border: 2px solid #007bff; /* Add border to the text */
-    background-color: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); /* Same as body background */
+    border: 2px solid #007bff;
+    background-color: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
     padding: 20px;
     border-radius: 15px;
 }
@@ -123,8 +131,15 @@ h2 {
     font-size: 1rem;
 }
 
+/* Grid Styling */
 .col-md-4 {
-    margin-bottom: 20px; /* space at the bottom of each column */
-    padding-left: 5px; /* space to the left of each column */
-    padding-right: 5px; /* space to the right of each column */
+    margin-bottom: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
+
+/* Cart Page Styling */
+.table-hover tbody tr:hover {
+    background-color: #e1f7e4;
+}
+

@@ -43,7 +43,19 @@ Once inside the project directory, you can install the necessary dependencies us
 ```bash
 pip install -r requirements.txt
 ```
-### 5. Running the Application
+
+### 5. Configuration & Customization
+To modify the default admin email:
+
+1. Navigate to `app.py`.
+2. Locate the line:
+```bash
+if email == "example_email@email.com":
+```
+3. Change "example_email@email.com" to your desired admin email address.
+This email address will have administrator privileges when registered, allowing for product management capabilities.
+
+### 6. Running the Application
 To run the application, simply execute:
 ```bash
 python app.py

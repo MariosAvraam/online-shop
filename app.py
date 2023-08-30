@@ -146,7 +146,7 @@ def add_product():
 def edit_product(product_id):
     """Route to edit an existing product."""
     product = Product.query.get_or_404(product_id)
-    form = ProductForm(obj=product)
+    form = EditProductForm(obj=product)
     
     if form.validate_on_submit():
         product.name = form.name.data
@@ -160,6 +160,16 @@ def edit_product(product_id):
 
     return render_template('edit_product.html', form=form, product=product)
 
+@app.route('/delete_product/<int:product_id>', methods=['POST'])
+@login_required
+@admin_required
+def delete_product(product_id):
+    """Route to delete a product."""
+    product = Product.query.get_or_404(product_id)
+    db.session.delete(product)
+    db.session.commit()
+    flash("Product deleted successfully!", "success")
+    return redirect(url_for('display_products'))
 
 
 @app.route('/cart')

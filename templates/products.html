@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Display products in a grid layout -->
 <h2>Products</h2>
 <div class="row">
   {% for product in all_products %}
+  <!-- Product card -->
   <div class="col-md-4 d-flex align-items-stretch">
     <div class="card h-100 w-100">
       <img src="{{ product.image_url }}" alt="{{ product.name }}" class="card-img-top">
@@ -19,17 +21,13 @@
             {{ product.price }}
           </p>
         </div>
+        <!-- Product action buttons -->
         <div class="d-flex justify-content-between mt-auto">
-          <!-- Added mt-auto to push the buttons to the bottom of the card -->
           <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-primary col-5">View Details</a>
-          <!-- col-5 ensures the button takes up almost half the space -->
-
           {% if current_user.is_authenticated and current_user.is_admin %}
           <a href="{{ url_for('edit_product', product_id=product.id) }}" class="btn btn-secondary col-5 ml-2">Edit</a>
-          <!-- col-5 ensures the button takes up almost half the space, ml-2 adds a little margin to the left -->
           {% endif %}
         </div>
-
       </div>
     </div>
   </div>

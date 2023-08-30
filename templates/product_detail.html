@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Product details page layout -->
 <div class="row justify-content-center">
+  <!-- Product image section -->
   <div class="col-lg-4 col-md-6 text-center">
     <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid product-detail-image">
   </div>
+
+  <!-- Product information section -->
   <div class="col-lg-4 col-md-6">
     <div class="product-detail-text">
       <h2>
@@ -16,9 +20,12 @@
       <p>$
         {{ product.price }}
       </p>
+      <!-- Add to Cart form button -->
+      {% if current_user.is_authenticated %}
       <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
         <button type="submit" class="btn btn-primary">Add to Cart</button>
       </form>
+      {% endif %}
     </div>
   </div>
 </div>

@@ -48,6 +48,8 @@ def admin_required(func):
 @app.route('/')
 def index():
     """Home route - Welcome page with options to register or login."""
+    if current_user.is_authenticated:
+        return redirect(url_for('display_products'))
     return render_template('index.html')
 
 @app.route('/register', methods=["GET", "POST"])
@@ -77,7 +79,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
-        return redirect(url_for('index'))
+        return redirect(url_for('display_products'))
     return render_template("register.html", form=form)
 
 @app.route('/login', methods=["GET", "POST"])
@@ -97,7 +99,7 @@ def login():
             return redirect(url_for('login'))
         
         login_user(user)
-        return redirect(url_for('index'))
+        return redirect(url_for('display_products'))
     return render_template("login.html", form=form)
 
 @app.route('/logout')

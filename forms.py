@@ -19,3 +19,10 @@ class ProductForm(FlaskForm):
     price = FloatField('Price', validators=[DataRequired()])
     image_url = StringField('Image URL', validators=[DataRequired(), URL()])
     submit = SubmitField('Add Product')
+
+class EditProductForm(FlaskForm):
+    name = StringField('Product Name', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[Optional()])
+    price = FloatField('Price', validators=[DataRequired()])
+    image_url = StringField('Image URL', validators=[DataRequired(), URL()])
+    submit = SubmitField('Update Product')

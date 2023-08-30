@@ -5,6 +5,10 @@ body {
     flex-direction: column;
 }
 
+.navbar {
+    background-color: #81abd7 !important; 
+}
+
 h2 {
     margin-bottom: 20px;
 }

@@ -2,6 +2,8 @@
 
 This repository contains a simple eCommerce web application built with Flask. Users can register, login, view products, add products to their cart, and checkout. Administrators have additional capabilities to add, edit, or delete products.
 
+![Online Shop Image](https://github.com/MariosAvraam/online-shop/blob/master/assets/Online%20Shop.png?raw=true)
+
 ## Features
 - User Registration and Login
 - Admin User Management

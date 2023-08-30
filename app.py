@@ -7,7 +7,7 @@ from models.user import User
 from models.cart import Cart
 from models.order import Order
 from models.product import Product
-from forms import RegisterForm, LoginForm, ProductForm
+from forms import RegisterForm, LoginForm, ProductForm, EditProductForm
 from functools import wraps
 
 app = Flask(__name__)
@@ -137,6 +137,27 @@ def add_product():
         flash("Product added successfully!", "success")
         return redirect(url_for('display_products'))
     return render_template('add_product.html', form=form)
+
+@app.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_product(product_id):
+    """Route to edit an existing product."""
+    product = Product.query.get_or_404(product_id)
+    form = ProductForm(obj=product)
+    
+    if form.validate_on_submit():
+        product.name = form.name.data
+        product.description = form.description.data
+        product.price = form.price.data
+        product.image_url = form.image_url.data
+
+        db.session.commit()
+        flash("Product updated successfully!", "success")
+        return redirect(url_for('display_products'))
+
+    return render_template('edit_product.html', form=form, product=product)
+
 
 
 @app.route('/cart')
